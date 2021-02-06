@@ -16,19 +16,19 @@ def main():
   root_path = Path('.')
   env_path = root_path / '.env'
   env = dotenv_values(env_path)
-  templ_loader = jinja2.FileSystemLoader(searchpath=root_path)
-  templ_env = jinja2.Environment(loader=templ_loader, autoescape=True)
-  templ_env.filters['b64encode'] = b64encode
-  templ = templ_env.get_template(sys.argv[1])
-  templ_vars = {}
+  tmpl_loader = jinja2.FileSystemLoader(searchpath=root_path)
+  tmpl_env = jinja2.Environment(loader=tmpl_loader, autoescape=True)
+  tmpl_env.filters['b64encode'] = b64encode
+  tmpl = tmpl_env.get_template(sys.argv[1])
+  tmpl_vars = {}
   for name, val in env.items():
     if name.endswith('[]'):
       name = name[:-2]
       val = literal_eval(val)
       assert type(val) is list
     name = name.lower()
-    templ_vars[name] = val
-  print(templ.render(**templ_vars))
+    tmpl_vars[name] = val
+  print(tmpl.render(**tmpl_vars))
 
 
 if __name__ == '__main__':

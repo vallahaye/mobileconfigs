@@ -10,7 +10,7 @@
       <key>PayloadVersion</key>
       <integer>1</integer>
       <key>PayloadIdentifier</key>
-      <string>pro.lahaye.vpn.autoconnect</string>
+      <string>net.vallahaye.vpn.autoconnect</string>
       <key>PayloadUUID</key>
       <string>fa95c97f-13e1-43ad-ae13-5cc5b4337310</string>
       <key>PayloadDisplayName</key>
@@ -48,7 +48,7 @@
       <integer>1</integer>
       <key>OnDemandRules</key>
       <array>
-        {% if vpn_autoconnect_ondemand_safe_wifi_ssids|length %}
+        {% if vpn_autoconnect_ondemand_safe_wifi_ssids|length > 0 %}
         <dict>
           <key>InterfaceTypeMatch</key>
           <string>WiFi</string>
@@ -74,7 +74,7 @@
   <key>PayloadDisplayName</key>
   <string>VPN Configurations</string>
   <key>PayloadIdentifier</key>
-  <string>pro.lahaye.vpn</string>
+  <string>net.vallahaye.vpn</string>
   <key>PayloadOrganization</key>
   <string>Valentin Lahaye</string>
   <key>PayloadUUID</key>
