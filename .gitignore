@@ -150,5 +150,5 @@ dmypy.json
 
 # End of https://www.toptal.com/developers/gitignore/api/code,dotenv,python
 
-public/*
-!public/.keep
+configs/*
+!configs/.keep

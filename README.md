@@ -10,15 +10,14 @@ LICENSE in the source distribution for details.
 
 # Managing the configuration files
 
-[Docker](https://www.docker.com/) and [Python](https://www.python.org/) `3.6` or newer are required
-to manage the configuration files.
+[Python](https://www.python.org/) `3.6` or newer is required to manage the configuration files.
 
 Run the following commands to create a new Python virtual environment and install the required
 packages inside:
 
 ```
-$ python -m venv .venv
-$ source .venv/bin/activate
+$ python -m venv venv
+$ source ./venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
@@ -33,16 +32,16 @@ VPN_AUTOCONNECT_ONDEMAND_SAFE_WIFI_SSIDS[]=[]
 #VPN_AUTOCONNECT_ONDEMAND_SAFE_WIFI_SSIDS[]=['Home-Sweet-Home']
 ```
 
-Run the following command to render the VPN configuration template and save it in the `public`
+Run the following command to render the VPN configuration template and save it in the `configs`
 directory:
 
 ```
-$ ./scripts/jinja2 templates/vpn.mobileconfig.j2 > public/vpn.mobileconfig
+$ ./scripts/jinja2 templates/vpn.mobileconfig.j2 > configs/vpn.mobileconfig
 ```
 
-Configuration files in the `public` directory are served through an HTTP server at
+Configuration files in the `configs` directory are served through an HTTP server at
 `http://localhost:8080` with the following command:
 
 ```
-$ ./scripts/serve-configs
+$ python -m http.server 8080 -d configs
 ```
