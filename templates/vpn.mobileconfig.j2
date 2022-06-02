@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>PayloadContent</key>
+  <array>
+    <dict>
+      <key>PayloadType</key>
+      <string>com.apple.vpn.managed</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>PayloadIdentifier</key>
+      <string>net.vallahaye.vpn.autoconnect</string>
+      <key>PayloadUUID</key>
+      <string>fa95c97f-13e1-43ad-ae13-5cc5b4337310</string>
+      <key>PayloadDisplayName</key>
+      <string>Autoconnect VPN</string>
+      <key>UserDefinedName</key>
+      <string>Autoconnect VPN</string>
+      <key>VPNType</key>
+      <string>L2TP</string>
+      <key>PPP</key>
+      <dict>
+        <key>AuthName</key>
+        <string>{{ vpn_autoconnect_ppp_auth_name }}</string>
+        <key>AuthPassword</key>
+        <string>{{ vpn_autoconnect_ppp_auth_password }}</string>
+        <key>TokenCard</key>
+        <false/>
+        <key>CommRemoteAddress</key>
+        <string>{{ vpn_autoconnect_ppp_remote_addr }}</string>
+      </dict>
+      <key>IPSec</key>
+      <dict>
+        <key>AuthenticationMethod</key>
+        <string>SharedSecret</string>
+        <key>LocalIdentifierType</key>
+        <string>KeyID</string>
+        <key>SharedSecret</key>
+        <data>{{ vpn_autoconnect_ipsec_psk | b64encode }}</data>
+      </dict>
+      <key>IPv4</key>
+      <dict>
+        <key>OverridePrimary</key>
+        <integer>1</integer>
+      </dict>
+      <key>OnDemandEnabled</key>
+      <integer>1</integer>
+      <key>OnDemandRules</key>
+      <array>
+        {% if vpn_autoconnect_ondemand_safe_wifi_ssids|length > 0 %}
+        <dict>
+          <key>InterfaceTypeMatch</key>
+          <string>WiFi</string>
+          <key>SSIDMatch</key>
+          <array>
+          {% for item in vpn_autoconnect_ondemand_safe_wifi_ssids %}
+            <string>{{ item }}</string>
+          {% endfor %}
+          </array>
+          <key>Action</key>
+          <string>Disconnect</string>
+        </dict>
+        {% endif %}
+        <dict>
+          <key>Action</key>
+          <string>Connect</string>
+        </dict>
+      </array>
+    </dict>
+  </array>
+  <key>PayloadDescription</key>
+  <string>A collection of VPN configurations</string>
+  <key>PayloadDisplayName</key>
+  <string>VPN Configurations</string>
+  <key>PayloadIdentifier</key>
+  <string>net.vallahaye.vpn</string>
+  <key>PayloadOrganization</key>
+  <string>Valentin Lahaye</string>
+  <key>PayloadUUID</key>
+  <string>3432fdfa-b8cb-4e9a-85ee-bd803f378182</string>
+  <key>PayloadRemovalDisallowed</key>
+  <false/>
+  <key>PayloadType</key>
+  <string>Configuration</string>
+  <key>PayloadVersion</key>
+  <integer>1</integer>
+</dict>
+</plist>
